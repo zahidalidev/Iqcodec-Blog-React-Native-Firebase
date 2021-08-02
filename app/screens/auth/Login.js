@@ -16,15 +16,17 @@ function Login(props) {
     const [feilds, setFeilds] = useState([
         {
             id: 0,
-            placeHolder: "Email",
+            placeHolder: "Enter your e-mail",
             value: '',
-            secure: false
+            secure: false,
+            icon: "email-outline"
         },
         {
             id: 1,
-            placeHolder: "Password",
+            placeHolder: "Create your password",
             value: '',
-            secure: true
+            secure: true,
+            icon: "lock-outline"
         },
     ]);
 
@@ -34,82 +36,25 @@ function Login(props) {
         setFeilds(tempFeilds);
     }
 
-    const handleSubmit = async () => {
-        const email = feilds[0].value.trim().toLowerCase();
-        const password = feilds[1].value;
-        try {
-            setIndicator(true)
-
-            const res = '';
-            // const res = await loginUser(email, password);
-            if (!res) {
-                setIndicator(false)
-                alert("Email or Password is incorrect")
-                return;
-            }
-            await AsyncStorage.setItem('user', JSON.stringify(res));
-            setIndicator(false)
-
-            // if (res.role === 'admin') {
-            //     props.navigation.navigate('adminScreen')
-            // } else if (res.role === 'rider') {
-            //     props.navigation.navigate('riderScreen')
-            // } else if (res.role === 'restaurant') {
-            //     props.navigation.navigate('resturentScreen')
-            // } else {
-            //     props.navigation.navigate('homeScreen')
-            // }
-
-        } catch (error) {
-            console.log("login error: ", error);
-            setIndicator(false)
-            alert("Email or Password is incorrect")
-        }
-    }
+    const handleSubmit = async () => { }
 
     // get user from AsyncStorage to confirm login or logout
-    let validateCurrentUser = async () => {
-        // await AsyncStorage.removeItem('user');
-        try {
-            let res = await AsyncStorage.getItem('user');
-            if (res) {
-                // if (res.role === 'admin') {
-                //     props.navigation.navigate('adminScreen')
-                // } else if (res.role === 'rider') {
-                //     props.navigation.navigate('riderScreen')
-                // } else if (res.role === 'restaurant') {
-                //     props.navigation.navigate('resturentScreen')
-                // } else {
-                //     props.navigation.navigate('homeScreen')
-                // }
-                return;
-            }
-            // props.navigation.navigate('LoginScreen');
-        } catch (error) {
-            console.log("auto login: ", error)
-        }
-    }
-
-    useEffect(() => {
-        validateCurrentUser();
-    }, []);
+    let validateCurrentUser = async () => { }
 
     return (
         <View style={styles.container}>
-            <View style={{ marginTop: RFPercentage(3), width: "85%", alignItems: "center" }} >
-                <Text style={{ color: Colors.primary, fontSize: Platform.OS === "ios" ? RFPercentage(3.5) : RFPercentage(5) }} >Hello!</Text>
-                <Text style={{ color: Colors.grey, fontSize: Platform.OS === "ios" ? RFPercentage(2) : RFPercentage(2.6) }} >Login to continue </Text>
-            </View>
 
             {/* Text feilds */}
             {feilds.map((item, i) =>
-                <View key={i} style={{ marginTop: i == 0 ? RFPercentage(6) : RFPercentage(6), width: "100%" }} >
+                <View key={i} style={{ marginTop: i == 0 ? RFPercentage(1) : RFPercentage(3), width: "100%" }} >
+                    <Text style={{ marginBottom: RFPercentage(2) }} >E-Mail Address</Text>
                     <AppTextInput
                         placeHolder={item.placeHolder}
                         width="100%"
                         value={item.value}
                         onChange={(text) => handleChange(text, item.id)}
                         secure={item.secure}
+                        icon={item.icon}
                     />
                 </View>
             )}
@@ -117,12 +62,42 @@ function Login(props) {
             {/* Login button */}
             <View style={{ width: "100%", marginTop: RFPercentage(5), justifyContent: 'center', alignItems: 'center' }} >
                 <AppTextButton
-                    name="LOGIN"
-                    borderRadius={RFPercentage(1.3)}
+                    name="Login"
+                    borderRadius={RFPercentage(10)}
                     onSubmit={() => handleSubmit()}
                     backgroundColor={Colors.primary}
                     width="80%"
-                    height={RFPercentage(5.5)}
+                    height={RFPercentage(6.5)}
+                />
+            </View>
+
+            <View style={{ flexDirection: "row", width: "100%", marginTop: RFPercentage(4), justifyContent: 'space-evenly', alignItems: 'center' }} >
+                <View style={{ height: 1.5, backgroundColor: Colors.lightGrey, width: "35%" }} ></View>
+                <View>
+                    <Text style={{ color: Colors.mediumGrey, fontSize: RFPercentage(2.4) }} >OR USING</Text>
+                </View>
+                <View style={{ height: 1.5, backgroundColor: Colors.lightGrey, width: "35%" }} ></View>
+            </View>
+
+            <View style={{ width: "100%", marginTop: RFPercentage(4), marginBottom: RFPercentage(5), justifyContent: 'space-evenly', alignItems: 'center', flexDirection: "row" }} >
+                <AppTextButton
+                    name="Google"
+                    borderRadius={RFPercentage(10)}
+                    onSubmit={() => handleSubmit()}
+                    backgroundColor={Colors.white}
+                    width="40%"
+                    textStyle={{ color: Colors.black }}
+                    height={RFPercentage(6.5)}
+                    google={true}
+                />
+                <AppTextButton
+                    name="Login"
+                    borderRadius={RFPercentage(10)}
+                    onSubmit={() => handleSubmit()}
+                    backgroundColor={"#4465AC"}
+                    width="40%"
+                    height={RFPercentage(6.5)}
+                    facebook={true}
                 />
             </View>
 

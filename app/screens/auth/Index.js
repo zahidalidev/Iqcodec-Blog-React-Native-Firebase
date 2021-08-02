@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Animated, ScrollView, Dimensions, Image } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Animated, ScrollView, Dimensions, Image, Platform } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { LinearGradient } from 'expo-linear-gradient';
 import Constants from "expo-constants"
@@ -71,45 +71,50 @@ function Index(props) {
                     backgroundColor="transparent" />
             </LinearGradient>
 
-            <LinearGradient colors={[Colors.primary, Colors.primaryLight]} start={[0.1, 0.7]} end={[1, 0.2]} style={{ width: "100%", flex: 0.6, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
-                <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} />
+            <LinearGradient colors={[Colors.primary, Colors.primaryLight]} start={[0.1, 0.7]} end={[1, 0.2]} style={{ width: "100%", flex: 0.65, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+                <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} style={{ marginTop: RFPercentage(-2), }} />
             </LinearGradient>
 
             {/* Bottom Contaienr */}
-            <View style={{ marginTop: -RFPercentage(4), borderTopRightRadius: RFPercentage(4), borderTopLeftRadius: RFPercentage(4), backgroundColor: Colors.lightGrey, width: "100%", flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+            <View style={{ marginTop: -RFPercentage(4), borderTopRightRadius: RFPercentage(4), borderTopLeftRadius: RFPercentage(4), backgroundColor: Colors.white, width: "100%", flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
                 <View style={{ width: "100%", justifyContent: 'flex-start', flex: 1, justifyContent: 'center', alignItems: "center" }}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }} >
+                        <View style={{ marginTop: RFPercentage(3), marginLeft: "7.5%", width: "85%", alignItems: "center" }} >
+                            <Text style={{ color: Colors.primary, fontSize: Platform.OS === "ios" ? RFPercentage(2.3) : RFPercentage(2.6) }} >Welcome back to IMINN!</Text>
+                            <Text style={{ marginTop: RFPercentage(2), color: Colors.black, fontSize: Platform.OS === "ios" ? RFPercentage(2) : RFPercentage(3.2) }} >Let’s Login into your Account!</Text>
+                        </View>
 
-                    {/* Tabs */}
-                    <View style={{ width: "70%", flexDirection: "row", height: RFPercentage(5), marginTop: RFPercentage(3) }}>
-                        <Animated.View style={{ position: "absolute", width: "50%", height: "100%", top: 0, left: 0, backgroundColor: Colors.primary, borderRadius: 4, transform: [{ translateX }] }} />
-                        <TouchableOpacity style={{ flex: 1, justifyContent: "center", alignItems: "center", borderRadius: 4, borderRightWidth: 0, borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
-                            onLayout={event => setXTabOne(event.nativeEvent.layout.x)} onPress={() => { setActive(0); handleSlide(xTabOne) }}
-                        >
-                            <Text style={{ fontSize: RFPercentage(2.2), color: active === 0 ? Colors.white : Colors.primary }}>
-                                Login
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ flex: 1, justifyContent: "center", alignItems: "center", borderRadius: 4, borderLeftWidth: 0, borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
-                            onLayout={event => { setXTabTwo(event.nativeEvent.layout.x) }} onPress={() => { setActive(1); handleSlide(xTabTwo) }}
-                        >
-                            <Text style={{ fontSize: RFPercentage(2.2), color: active === 1 ? Colors.white : Colors.primary }}>
-                                Sign Up
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                        {/* Tabs */}
+                        <View style={{ borderRadius: RFPercentage(10), padding: 3, backgroundColor: Colors.primaryLight2, marginLeft: "15%", width: "70%", flexDirection: "row", height: RFPercentage(7.5), marginTop: RFPercentage(5), justifyContent: "center", alignItems: "center" }}>
+                            <Animated.View style={{ justifyContent: "center", alignItems: "center", position: "absolute", width: "50%", height: "90%", top: 5, left: active === 0 ? 5 : -5, bottom: 5, backgroundColor: Colors.primary, borderRadius: RFPercentage(10), transform: [{ translateX }] }} />
+                            <TouchableOpacity style={{ flex: 1, justifyContent: "center", alignItems: "center", borderRadius: RFPercentage(10) }}
+                                onLayout={event => setXTabOne(event.nativeEvent.layout.x)} onPress={() => { setActive(0); handleSlide(xTabOne) }}
+                            >
+                                <Text style={{ fontSize: RFPercentage(2.2), color: active === 0 ? Colors.white : Colors.primary }}>
+                                    Login
+                                </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ flex: 1, justifyContent: "center", alignItems: "center", borderRadius: RFPercentage(10) }}
+                                onLayout={event => { setXTabTwo(event.nativeEvent.layout.x) }} onPress={() => { setActive(1); handleSlide(xTabTwo) }}
+                            >
+                                <Text style={{ fontSize: RFPercentage(2.2), color: active === 1 ? Colors.white : Colors.primary }}>
+                                    Sign Up
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
 
-                    {/* Login and Sign Up Container */}
-                    <ScrollView showsHorizontalScrollIndicator={false} style={{ marginTop: RFPercentage(4) }} >
-                        <Animated.View style={{ justifyContent: "center", alignItems: "center", transform: [{ translateX: translateXTabOne }] }} onLayout={event => setTranslateY(event.nativeEvent.layout.height)}>
-                            {initialComponent === 0 ? <Login {...props} /> : <SignUp {...props} />}
-                        </Animated.View>
+                        {/* Login and Sign Up Container */}
+                        <View style={{ marginTop: RFPercentage(4) }} >
+                            <Animated.View style={{ justifyContent: "center", alignItems: "center", transform: [{ translateX: translateXTabOne }] }} onLayout={event => setTranslateY(event.nativeEvent.layout.height)}>
+                                {initialComponent === 0 ? <Login {...props} /> : <SignUp {...props} />}
+                            </Animated.View>
 
-                        <Animated.View style={{ justifyContent: "center", alignItems: "center", transform: [{ translateX: translateXTabTwo }, { translateY: -translateY }] }}>
-                            <Login {...props} />
-                        </Animated.View>
+                            <Animated.View style={{ justifyContent: "center", alignItems: "center", transform: [{ translateX: translateXTabTwo }, { translateY: -translateY }] }}>
+                                <Login {...props} />
+                            </Animated.View>
+                        </View>
                     </ScrollView>
                 </View>
-
             </View>
         </View>
     );
@@ -119,7 +124,7 @@ const styles = StyleSheet.create({
     container: {
         // marginTop: Constants.statusBarHeight,
         flex: 1,
-        backgroundColor: Colors.lightGrey,
+        backgroundColor: Colors.white,
         alignItems: 'center',
         justifyContent: 'center',
         width: "100%"

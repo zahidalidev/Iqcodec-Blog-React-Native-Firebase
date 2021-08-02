@@ -17,7 +17,6 @@ function AppTextButton({ facebook = false, google = false, disabled = false, nam
             },
             shadowOpacity: 0.20,
             shadowRadius: 1.41,
-
             elevation: 2, backgroundColor, width, flexDirection: "row", height, borderRadius: borderRadius, justifyContent: "center", ...buttonStyle, alignItems: "center"
         }} >
             {

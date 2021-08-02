@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Animated, ScrollView, Dimensions } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, TouchableOpacity, Animated, ScrollView, Dimensions, Image } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import { LinearGradient } from 'expo-linear-gradient';
+import Constants from "expo-constants"
 
 // components
 import Login from './Login';
@@ -8,6 +10,8 @@ import SignUp from './SignUp';
 
 // config
 import Colors from "../../config/Colors"
+
+import logo from "../../../assets/images/logo.png"
 
 const { width } = Dimensions.get("window");
 
@@ -60,17 +64,19 @@ function Index(props) {
 
     return (
         <View style={styles.container}>
-            <StatusBar style="light" backgroundColor={Colors.primary} />
 
-            {/* Kitchen buddy top container */}
-            <View style={{ backgroundColor: Colors.primary, width: "100%", flex: 0.7, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
-                <Text style={{ marginTop: RFPercentage(-4), fontSize: RFPercentage(6), color: Colors.white }} >
-                    Logo
-                </Text>
-            </View>
+            <LinearGradient colors={[Colors.primary, Colors.primaryLight]} start={[0.1, 0.7]} end={[1, 0.2]}  >
+                <StatusBar style="light" barStyle="light-content"
+                    translucent={true}
+                    backgroundColor="transparent" />
+            </LinearGradient>
+
+            <LinearGradient colors={[Colors.primary, Colors.primaryLight]} start={[0.1, 0.7]} end={[1, 0.2]} style={{ width: "100%", flex: 0.6, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+                <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} />
+            </LinearGradient>
 
             {/* Bottom Contaienr */}
-            <View style={{ marginTop: -RFPercentage(5), borderTopRightRadius: RFPercentage(5), borderTopLeftRadius: RFPercentage(5), backgroundColor: Colors.lightGrey, width: "100%", flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+            <View style={{ marginTop: -RFPercentage(4), borderTopRightRadius: RFPercentage(4), borderTopLeftRadius: RFPercentage(4), backgroundColor: Colors.lightGrey, width: "100%", flex: 2, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
                 <View style={{ width: "100%", justifyContent: 'flex-start', flex: 1, justifyContent: 'center', alignItems: "center" }}>
 
                     {/* Tabs */}

@@ -7,7 +7,7 @@ import { Button } from 'react-native-paper';
 import fb from "../../../assets/images/facebook.png"
 import go from "../../../assets/images/google.png"
 
-function AppTextButton({ facebook = false, google = false, disabled = false, name, onSubmit, width, height = RFPercentage(6), borderRadius = RFPercentage(10), backgroundColor = "black", buttonStyle, textStyle }) {
+function AppTextButton({ facebook = false, google = false, disabled = false, name, onSubmit, width, height = RFPercentage(6), borderRadius = RFPercentage(1.2), backgroundColor = "black", buttonStyle, textStyle }) {
     return (
         <TouchableOpacity onPress={() => onSubmit()} style={{
             shadowColor: "#000",

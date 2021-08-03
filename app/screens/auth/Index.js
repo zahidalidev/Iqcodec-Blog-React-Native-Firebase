@@ -65,14 +65,14 @@ function Index(props) {
     return (
         <View style={styles.container}>
 
-            <LinearGradient colors={[Colors.primary, Colors.primaryLight]} start={[0.1, 0.7]} end={[1, 0.2]}  >
+            <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 0.7]} end={[1, 0.2]}  >
                 <StatusBar style="light" barStyle="light-content"
                     translucent={true}
                     backgroundColor="transparent" />
             </LinearGradient>
 
-            <LinearGradient colors={[Colors.primary, Colors.primaryLight]} start={[0.1, 0.7]} end={[1, 0.2]} style={{ width: "100%", flex: 0.65, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
-                <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} style={{ marginTop: RFPercentage(-2), }} />
+            <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 1.2]} end={[1.2, 0.9]} style={{ width: "100%", flex: 0.65, flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} >
+                <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} style={{ width: RFPercentage(16), height: RFPercentage(10), marginTop: RFPercentage(-2), }} />
             </LinearGradient>
 
             {/* Bottom Contaienr */}
@@ -80,12 +80,12 @@ function Index(props) {
                 <View style={{ width: "100%", justifyContent: 'flex-start', flex: 1, justifyContent: 'center', alignItems: "center" }}>
                     <ScrollView showsVerticalScrollIndicator={false} style={{ width: "100%" }} >
                         <View style={{ marginTop: RFPercentage(3), marginLeft: "7.5%", width: "85%", alignItems: "center" }} >
-                            <Text style={{ color: Colors.primary, fontSize: Platform.OS === "ios" ? RFPercentage(2.3) : RFPercentage(2.6) }} >Welcome back to IMINN!</Text>
+                            <Text style={{ color: Colors.primary, fontSize: Platform.OS === "ios" ? RFPercentage(2.3) : RFPercentage(2.6) }} >Welcome back to IQCODEC!</Text>
                             <Text style={{ marginTop: RFPercentage(2), color: Colors.black, fontSize: Platform.OS === "ios" ? RFPercentage(2) : RFPercentage(3.2) }} >Let’s Login into your Account!</Text>
                         </View>
 
                         {/* Tabs */}
-                        <View style={{ borderRadius: RFPercentage(10), padding: 3, backgroundColor: Colors.primaryLight2, marginLeft: "15%", width: "70%", flexDirection: "row", height: RFPercentage(7.5), marginTop: RFPercentage(5), justifyContent: "center", alignItems: "center" }}>
+                        <View style={{ borderRadius: RFPercentage(10), padding: 3, backgroundColor: Colors.primaryLight2, marginLeft: "15%", width: "70%", flexDirection: "row", height: RFPercentage(6.8), marginTop: RFPercentage(5), justifyContent: "center", alignItems: "center" }}>
                             <Animated.View style={{ justifyContent: "center", alignItems: "center", position: "absolute", width: "50%", height: "90%", top: 5, left: active === 0 ? 5 : -5, bottom: 5, backgroundColor: Colors.primary, borderRadius: RFPercentage(10), transform: [{ translateX }] }} />
                             <TouchableOpacity style={{ flex: 1, justifyContent: "center", alignItems: "center", borderRadius: RFPercentage(10) }}
                                 onLayout={event => setXTabOne(event.nativeEvent.layout.x)} onPress={() => { setActive(0); handleSlide(xTabOne) }}

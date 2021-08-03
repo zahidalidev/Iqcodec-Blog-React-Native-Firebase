@@ -63,44 +63,11 @@ function Login(props) {
             <View style={{ width: "100%", marginTop: RFPercentage(5), justifyContent: 'center', alignItems: 'center' }} >
                 <AppTextButton
                     name="Login"
-                    borderRadius={RFPercentage(10)}
                     onSubmit={() => handleSubmit()}
                     backgroundColor={Colors.primary}
                     width="80%"
-                    height={RFPercentage(6.5)}
                 />
             </View>
-
-            <View style={{ flexDirection: "row", width: "100%", marginTop: RFPercentage(4), justifyContent: 'space-evenly', alignItems: 'center' }} >
-                <View style={{ height: 1.5, backgroundColor: Colors.lightGrey, width: "35%" }} ></View>
-                <View>
-                    <Text style={{ color: Colors.mediumGrey, fontSize: RFPercentage(2.4) }} >OR USING</Text>
-                </View>
-                <View style={{ height: 1.5, backgroundColor: Colors.lightGrey, width: "35%" }} ></View>
-            </View>
-
-            <View style={{ width: "100%", marginTop: RFPercentage(4), marginBottom: RFPercentage(5), justifyContent: 'space-evenly', alignItems: 'center', flexDirection: "row" }} >
-                <AppTextButton
-                    name="Google"
-                    borderRadius={RFPercentage(10)}
-                    onSubmit={() => handleSubmit()}
-                    backgroundColor={Colors.white}
-                    width="40%"
-                    textStyle={{ color: Colors.black }}
-                    height={RFPercentage(6.5)}
-                    google={true}
-                />
-                <AppTextButton
-                    name="Login"
-                    borderRadius={RFPercentage(10)}
-                    onSubmit={() => handleSubmit()}
-                    backgroundColor={"#4465AC"}
-                    width="40%"
-                    height={RFPercentage(6.5)}
-                    facebook={true}
-                />
-            </View>
-
         </View>
     );
 }

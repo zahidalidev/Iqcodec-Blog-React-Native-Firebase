@@ -5,12 +5,12 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Colors from "../../config/Colors"
 
-function AppTextInput({ autoFocus = false, elevation = 0, borderColor = Colors.primary, borderWidth = 0, placeHolder, value, onChange, width = "100%", height = RFPercentage(7), icon, secure = false, iconType = "MaterialCommunityIcons", editable = true, startEdit, endEdit }) {
+function AppTextInput({ autoFocus = false, elevation = 0, borderColor = Colors.primary, borderWidth = 0, placeHolder, value, onChange, width = "100%", height = RFPercentage(6), icon, secure = false, iconType = "MaterialCommunityIcons", editable = true, startEdit, endEdit }) {
     const [eyeIcon, setEyeIcon] = useState(false)
 
     return (
         <View style={{
-            backgroundColor: Colors.lightGrey, borderRadius: RFPercentage(10),
+            backgroundColor: Colors.lightGrey, borderRadius: RFPercentage(1.2),
             width: width, alignItems: 'flex-start', justifyContent: 'center',
             borderWidth: borderWidth, borderColor: borderColor, height, elevation
         }}>

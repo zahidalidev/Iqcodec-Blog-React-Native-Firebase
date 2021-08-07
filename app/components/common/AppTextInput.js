@@ -5,12 +5,12 @@ import { RFPercentage } from 'react-native-responsive-fontsize';
 
 import Colors from "../../config/Colors"
 
-function AppTextInput({ autoFocus = false, elevation = 0, borderColor = Colors.primary, borderWidth = 0, placeHolder, value, onChange, width = "100%", height = RFPercentage(6), icon, secure = false, iconType = "MaterialCommunityIcons", editable = true, startEdit, endEdit }) {
+function AppTextInput({ backgroundColor = Colors.lightGrey, autoFocus = false, elevation = 0, borderColor = Colors.primary, rightIcon = false, rightFunction, borderWidth = 0, placeHolder, value, onChange, width = "100%", height = RFPercentage(6), icon, secure = false, iconType = "MaterialCommunityIcons", editable = true, startEdit, endEdit }) {
     const [eyeIcon, setEyeIcon] = useState(false)
 
     return (
         <View style={{
-            backgroundColor: Colors.lightGrey, borderRadius: RFPercentage(1.2),
+            backgroundColor, borderRadius: RFPercentage(1.2),
             width: width, alignItems: 'flex-start', justifyContent: 'center',
             borderWidth: borderWidth, borderColor: borderColor, height, elevation
         }}>
@@ -20,8 +20,13 @@ function AppTextInput({ autoFocus = false, elevation = 0, borderColor = Colors.p
                     :
                     <MaterialCommunityIcons color={Colors.mediumGrey} style={{ padding: RFPercentage(1), paddingRight: 0, marginLeft: RFPercentage(1.5) }} size={RFPercentage(3)} name={icon} />
                 }
-
-                <TextInput style={{ color: Colors.black, padding: RFPercentage(1), width: icon ? "95%" : "100%", fontSize: RFPercentage(2.2) }}
+                {rightIcon ?
+                    <TouchableOpacity onPress={() => rightFunction()} style={{ width: "10%", justifyContent: "center", alignItems: "center" }} >
+                        <MaterialCommunityIcons key={'3'} color={Colors.primary} style={{ right: RFPercentage(1) }} size={RFPercentage(3)} name={rightIcon} />
+                    </TouchableOpacity>
+                    : null
+                }
+                <TextInput style={{ color: Colors.black, padding: rightIcon ? 0 : RFPercentage(1), width: icon ? "95%" : "100%", fontSize: RFPercentage(2.2) }}
                     placeholder={placeHolder}
                     placeholderTextColor={Colors.mediumGrey}
                     value={value}
@@ -32,6 +37,7 @@ function AppTextInput({ autoFocus = false, elevation = 0, borderColor = Colors.p
                     onSubmitEditing={endEdit}
                     autoFocus={autoFocus}
                 />
+
             </View>
         </View>
     );

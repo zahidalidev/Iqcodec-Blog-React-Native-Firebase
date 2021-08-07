@@ -14,7 +14,6 @@ function PostDetails(props) {
         html: htmlTemp.replace(/<a/ig, '<a target=\"_blank\"')
     };
 
-    console.log(source)
     return (
         <AutoHeightWebView style={{ width: "90%", marginTop: 35, marginLeft: "5%" }}
             // customScript={`document.body.style.background = 'lightyellow';`}

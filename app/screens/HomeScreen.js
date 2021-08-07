@@ -29,14 +29,14 @@ const width = Dimensions.get('window').width
 
 function HomeScreen() {
 
-    let [allPosts, setAllPosts] = useState()
+    let [allPosts, setAllPosts] = useState([])
     let [activityIndic, setActivityIndic] = useState()
     let [searchValue, setSearchValue] = useState()
 
     const getPosts = async () => {
         try {
             const data = await GetAllBlogs()
-            console.log(data[0])
+            setAllPosts(data)
         } catch (error) {
             console.log("Getting posts error")
         }
@@ -86,8 +86,15 @@ function HomeScreen() {
                     : <>
                         {/* Bottom Contaienr */}
                         <View style={{ flexDirection: 'column', backgroundColor: Colors.white, width: "100%", flex: 1.8, alignItems: 'center', justifyContent: 'center' }} >
-
-
+                            {
+                                allPosts.map((item, index) => (
+                                    <View key={index} style={{ elevation: 2, flexDirection: "row", backgroundColor: Colors.white, width: "90%", height: RFPercentage(14), borderRadius: RFPercentage(1), marginBottom: RFPercentage(1), marginTop: index == 0 ? RFPercentage(2) : RFPercentage(1) }} >
+                                        <View style={{ width: "40%" }} >
+                                            <Image resizeMode="cover" style={{ borderRadius: 10, width: "100%", height: "100%" }} source={{ uri: item.featuredImageSrc }} />
+                                        </View>
+                                    </View>
+                                ))
+                            }
                         </View>
                     </>
                 }

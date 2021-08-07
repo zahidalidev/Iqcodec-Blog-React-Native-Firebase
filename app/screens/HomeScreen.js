@@ -9,7 +9,8 @@ import {
     StyleSheet,
     StatusBar,
     ActivityIndicator,
-    Image
+    Image,
+    ScrollView
 } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import { RFPercentage } from 'react-native-responsive-fontsize';
@@ -50,8 +51,8 @@ function HomeScreen() {
     }
 
     return (
-        <>
-            <View style={{ width: "100%", flex: 0.37, backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center' }} >
+        <ScrollView style={{ flex: 1, width: "100%", backgroundColor: Colors.white }} >
+            <View style={{ width: "100%", height: RFPercentage(26), backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center' }} >
                 <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 0.7]} end={[1, 0.2]}  >
                     <StatusBar style="light" barStyle="light-content"
                         translucent={true}
@@ -86,17 +87,14 @@ function HomeScreen() {
                         {/* Bottom Contaienr */}
                         <View style={{ flexDirection: 'column', backgroundColor: Colors.white, width: "100%", flex: 1.8, alignItems: 'center', justifyContent: 'center' }} >
 
-                            {/* Search feilds */}
-                            <View style={{ flexDirection: 'column', marginTop: RFPercentage(5) }} >
 
-                            </View>
                         </View>
                     </>
                 }
             </View>
             <View>
             </View>
-        </>
+        </ScrollView>
     );
 };
 

@@ -59,7 +59,7 @@ function HomeScreen() {
                         backgroundColor="transparent" />
                 </LinearGradient>
 
-                <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 1.2]} end={[1.2, 0.9]} style={{ width: width, flex: 1, borderBottomLeftRadius: RFPercentage(7), borderBottomRightRadius: RFPercentage(7), flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }} >
+                <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 1.2]} end={[1.2, 0.9]} style={{ width: width, flex: 1, borderBottomLeftRadius: RFPercentage(5), borderBottomRightRadius: RFPercentage(5), flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }} >
                     <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} style={{ marginBottom: RFPercentage(-2), width: RFPercentage(16), height: RFPercentage(10) }} />
 
                     <View style={{ width: "90%", justifyContent: 'flex-start', alignItems: 'center', marginBottom: RFPercentage(-1), }} >
@@ -91,6 +91,16 @@ function HomeScreen() {
                                     <View key={index} style={{ elevation: 2, flexDirection: "row", backgroundColor: Colors.white, width: "90%", height: RFPercentage(14), borderRadius: RFPercentage(1), marginBottom: RFPercentage(1), marginTop: index == 0 ? RFPercentage(2) : RFPercentage(1) }} >
                                         <View style={{ width: "40%" }} >
                                             <Image resizeMode="cover" style={{ borderRadius: 10, width: "100%", height: "100%" }} source={{ uri: item.featuredImageSrc }} />
+                                        </View>
+                                        <View style={{ justifyContent: "space-between", alignItems: "flex-start", width: "60%", flexDirection: "column", padding: RFPercentage(1.5) }} >
+                                            <Text numberOfLines={2} style={{ fontSize: RFPercentage(2.1), fontFamily: "sans-serif-medium" }} >{item.title}</Text>
+                                            <Text numberOfLines={2} style={{ fontSize: RFPercentage(1.7), fontFamily: "sans-serif", color: Colors.grey }} >{item.excerpt}</Text>
+                                            <View style={{ alignItems: "flex-start", flexDirection: "row", width: "100%", justifyContent: "flex-start" }} >
+                                                <Text numberOfLines={1} style={{ width: "25%", fontSize: RFPercentage(1.7), fontFamily: "sans-serif-medium" }} >{item.authorName}</Text>
+                                                <View style={{ width: "60%", justifyContent: "flex-start" }} >
+                                                    <Text numberOfLines={1} style={{ alignSelf: "flex-start", fontSize: RFPercentage(1.7), fontFamily: "sans-serif-medium", color: Colors.mediumGrey }} >{item.date}</Text>
+                                                </View>
+                                            </View>
                                         </View>
                                     </View>
                                 ))

@@ -5,9 +5,10 @@ export const GetAllBlogs = async () => {
     let { data } = await axios.get('https://iqcodec.tech/wp-json/wp/v2/posts');
     let filteredData = []
     for (let i = 0; i < data.length; i++) {
+        let date = new Date(data[i].date).toDateString()
         let tempObj = {
             id: data[i].id,
-            date: data[i].date,
+            date,
             title: data[i].title.rendered,
             content: data[i].content.rendered,
             excerpt: data[i].excerpt.rendered.replace(regex, ''),

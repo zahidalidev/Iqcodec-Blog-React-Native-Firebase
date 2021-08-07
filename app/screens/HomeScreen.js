@@ -14,15 +14,11 @@ import { GetAllBlogs } from "../services/BlogServices";
 
 function HomeScreen() {
 
+    let [allPosts, setAllPosts] = useState()
+
     const getPosts = async () => {
         try {
             const data = await GetAllBlogs()
-            // let tempData = [];
-            // for(let i = 0; i < data.lenght; i++){
-            //     let tempObj = {
-
-            //     }
-            // }
             console.log(data[0])
         } catch (error) {
             console.log("Getting posts error")

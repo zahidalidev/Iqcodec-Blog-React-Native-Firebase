@@ -6,7 +6,7 @@ import Colors from '../config/Colors';
 
 function Card({ props, index, item }) {
     return (
-        <TouchableOpacity onPress={() => props.navigation.navigate('PostDetails')} activeOpacity={0.9} key={index} style={{ elevation: 2, flexDirection: "row", backgroundColor: Colors.white, width: "90%", height: RFPercentage(14), borderRadius: RFPercentage(1), marginBottom: RFPercentage(1), marginTop: index == 0 ? RFPercentage(2) : RFPercentage(1) }} >
+        <TouchableOpacity onPress={() => props.navigation.navigate('PostDetails', { 'post': item })} activeOpacity={0.9} key={index} style={{ elevation: 2, flexDirection: "row", backgroundColor: Colors.white, width: "90%", height: RFPercentage(14), borderRadius: RFPercentage(1), marginBottom: RFPercentage(1), marginTop: index == 0 ? RFPercentage(2) : RFPercentage(1) }} >
             <View style={{ width: "40%" }} >
                 <Image resizeMode="cover" style={{ borderRadius: 10, width: "100%", height: "100%" }} source={{ uri: item.featuredImageSrc }} />
             </View>

@@ -28,7 +28,7 @@ import Card from '../components/Card';
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
 
-function HomeScreen() {
+function HomeScreen(props) {
 
     let [allPosts, setAllPosts] = useState([])
     let [activityIndic, setActivityIndic] = useState()
@@ -87,11 +87,9 @@ function HomeScreen() {
                     : <>
                         {/* Bottom Contaienr */}
                         <View style={{ marginBottom: RFPercentage(4), flexDirection: 'column', backgroundColor: Colors.white, width: "100%", flex: 1.8, alignItems: 'center', justifyContent: 'center' }} >
-                            {
-                                allPosts.map((item, index) => (
-                                    <Card item={item} key={index} />
-                                ))
-                            }
+                            {allPosts.map((item, index) => (
+                                <Card props={props} item={item} key={index} index={index} />
+                            ))}
                         </View>
                     </>
                 }

@@ -1,7 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, SafeAreaView, ScrollView, Platform, Dimensions } from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView, Platform, Dimensions, StatusBar } from 'react-native';
 import AutoHeightWebView from 'react-native-autoheight-webview'
+import { Appbar } from 'react-native-paper';
 import { RFPercentage } from 'react-native-responsive-fontsize';
+import Colors from '../config/Colors';
+import Constants from 'expo-constants';
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
@@ -15,9 +18,14 @@ function PostDetails(props) {
     };
 
     return (
-        <AutoHeightWebView style={{ width: "90%", marginTop: 35, marginLeft: "5%" }}
-            // customScript={`document.body.style.background = 'lightyellow';`}
-            customStyle={`
+        <View style={{ flex: 1 }} >
+            <StatusBar backgroundColor={Colors.primary} />
+            <Appbar style={{ backgroundColor: Colors.primary, marginTop: Constants.statusBarHeight }} >
+                <Appbar.BackAction onPress={() => props.navigation.navigate('HomeScreen')} />
+            </Appbar>
+            <AutoHeightWebView style={{ width: "90%", marginTop: 35, marginLeft: "5%" }}
+                // customScript={`document.body.style.background = 'lightyellow';`}
+                customStyle={`
                 p {
                 font-size: 16px;
                 }
@@ -27,17 +35,18 @@ function PostDetails(props) {
                     margin-left: ${RFPercentage(-3.5)}px
                 }
             `}
-            allowsFullscreenVideo={true}
-            onSizeUpdated={size => console.log(size.height)}
-            files={[{
-                href: 'cssfileaddress',
-                type: 'text/css',
-                rel: 'stylesheet'
-            }]}
-            source={source}
-            scalesPageToFit={true}
-            viewportContent={'width=device-width, user-scalable=no'}
-        />
+                allowsFullscreenVideo={true}
+                // onSizeUpdated={size => console.log(size.height)}
+                files={[{
+                    href: 'cssfileaddress',
+                    type: 'text/css',
+                    rel: 'stylesheet'
+                }]}
+                source={source}
+                scalesPageToFit={true}
+                viewportContent={'width=device-width, user-scalable=no'}
+            />
+        </View>
     );
 }
 

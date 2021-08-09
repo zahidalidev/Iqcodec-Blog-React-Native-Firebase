@@ -17,9 +17,10 @@ function PostDetails(props) {
 
         setPostDetail({
             auther: post.authorName,
-            title: post.title
+            title: post.title,
+            date: post.date
         })
-        console.log(post.content)
+        // console.log(post.date)
         setSource({
             html: post.content.replace(/<a/ig, '<a target=\"_blank\"')
         })
@@ -38,10 +39,19 @@ function PostDetails(props) {
                     <Text style={{ fontFamily: "sans-serif-medium", color: Colors.white, fontSize: RFPercentage(2.5), marginRight: RFPercentage(4) }} >IQCODEC</Text>
                 </View>
             </Appbar>
+            <ScrollView>
+                <View style={{ width: "90%", marginLeft: "5%", marginTop: RFPercentage(3) }} >
+                    <Text style={{ fontSize: RFPercentage(3), fontWeight: "bold" }} >{postDetails.title}</Text>
+                    <View style={{ flexDirection: "row", marginTop: RFPercentage(0.7) }} >
+                        <Text>By</Text>
+                        <Text style={{ fontWeight: "bold" }} > {postDetails.auther}</Text>
+                        <Text>  -  {postDetails.date}</Text>
+                    </View>
+                </View>
 
-            <AutoHeightWebView style={{ width: "90%", marginTop: 35, marginLeft: "5%" }}
-                // customScript={`document.body.style.background = 'lightyellow';`}
-                customStyle={`
+                <AutoHeightWebView style={{ width: "90%", marginTop: RFPercentage(2), marginLeft: "5%" }}
+                    // customScript={`document.body.style.background = 'lightyellow';`}
+                    customStyle={`
                     p {
                     font-size: 16px;
                     }
@@ -50,24 +60,25 @@ function PostDetails(props) {
                         height: 200px;
                         margin-left: ${RFPercentage(-3.5)}px
                     }
-                    figure {
-                        width: 100px ;
+                    img {
+                        width: 120% ;
                         height: 200px;
                         margin-left: ${RFPercentage(-3.5)}px;
-                        margin-bottom: 200px
+                        margin-bottom: 10px
                     }
                 `}
-                allowsFullscreenVideo={true}
-                // onSizeUpdated={size => console.log(size.height)}
-                files={[{
-                    href: 'cssfileaddress',
-                    type: 'text/css',
-                    rel: 'stylesheet'
-                }]}
-                source={source}
-                scalesPageToFit={true}
-                viewportContent={'width=device-width, user-scalable=no'}
-            />
+                    allowsFullscreenVideo={true}
+                    // onSizeUpdated={size => console.log(size.height)}
+                    files={[{
+                        href: 'cssfileaddress',
+                        type: 'text/css',
+                        rel: 'stylesheet'
+                    }]}
+                    source={source}
+                    scalesPageToFit={true}
+                    viewportContent={'width=device-width, user-scalable=no'}
+                />
+            </ScrollView>
         </View>
     );
 }

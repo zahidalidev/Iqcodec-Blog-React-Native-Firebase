@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
 // components
 import AppTextInput from "../../components/common/AppTextInput"
 import AppTextButton from "../../components/common/AppTextButton"
+import LoadingModal from "../../components/common/LoadingModal"
+
+// services
+import { loginUser } from "../../services/UserServices"
 
 // config
 import Colors from '../../config/Colors';
@@ -37,19 +41,57 @@ function Login(props) {
     }
 
     const handleSubmit = async () => {
+        const email = feilds[0].value.trim().toLowerCase();
+        const password = feilds[1].value.trim();
+        try {
+            showIndicator(true)
 
+            const res = await loginUser(email, password);
+            if (!res) {
+                showIndicator(false)
+                alert("Email or Password is incorrect")
+                return;
+            }
+            await AsyncStorage.setItem('user', JSON.stringify(res));
+            showIndicator(false)
+
+            props.navigation.navigate('HomeScreen')
+
+        } catch (error) {
+            console.log("login error: ", error);
+            showIndicator(false)
+            alert("Email or Password is incorrect")
+        }
     }
 
     // get user from AsyncStorage to confirm login or logout
-    let validateCurrentUser = async () => { }
+    let validateCurrentUser = async () => {
+        // await AsyncStorage.removeItem('user');
+        try {
+            let res = await AsyncStorage.getItem('user');
+            if (res) {
+                props.navigation.navigate('HomeScreen')
+                return;
+            }
+            props.navigation.navigate('LoginScreen');
+        } catch (error) {
+            console.log("auto login: ", error)
+        }
+    }
+
+    useEffect(() => {
+        validateCurrentUser();
+    }, []);
 
     return (
         <View style={styles.container}>
 
+            <LoadingModal show={indicator} />
+
             {/* Text feilds */}
             {feilds.map((item, i) =>
                 <View key={i} style={{ marginTop: i == 0 ? RFPercentage(1) : RFPercentage(3), width: "100%" }} >
-                    <Text style={{ marginBottom: RFPercentage(2) }} >E-Mail Address</Text>
+                    <Text style={{ marginBottom: RFPercentage(2) }} >{item.placeHolder}</Text>
                     <AppTextInput
                         placeHolder={item.placeHolder}
                         width="100%"

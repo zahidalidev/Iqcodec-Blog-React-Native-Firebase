@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const GetAllBlogs = async () => {
     const regex = /(<([^>]+)>)/ig;
     let { data } = await axios.get('https://iqcodec.tech/wp-json/wp/v2/posts');

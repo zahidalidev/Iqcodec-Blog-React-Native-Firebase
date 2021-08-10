@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import {
-    SafeAreaView,
-    View,
-    Text,
-    TouchableOpacity,
-    Modal,
-    Dimensions,
-    StyleSheet,
-    StatusBar,
-    ActivityIndicator,
-    Image,
-    ScrollView
-} from 'react-native';
-import { Appbar } from 'react-native-paper';
+import { View, Image, Text, TouchableOpacity, Dimensions, StyleSheet, StatusBar, ScrollView } from 'react-native';
 import { RFPercentage } from 'react-native-responsive-fontsize';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { WebView } from 'react-native-webview';
 import AppTextInput from "../components/common/AppTextInput"
 import { LinearGradient } from 'expo-linear-gradient';
+import { MaterialIcons } from "@expo/vector-icons";
+import { Restart } from "fiction-expo-restart"
 
-import Colors from "../config/Colors"
-import logo from "../../assets/images/logo.png"
-
+// components
 import { GetAllBlogs } from "../services/BlogServices";
 import Card from '../components/Card';
 
-const height = Dimensions.get('window').height
+// images
+import logo from "../../assets/images/logo.png"
+
+// config
+import Colors from "../config/Colors"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingModal from '../components/common/LoadingModal';
+
 const width = Dimensions.get('window').width
 
 function HomeScreen(props) {
@@ -36,11 +28,14 @@ function HomeScreen(props) {
 
     const getPosts = async () => {
         try {
+            setActivityIndic(true)
             const data = await GetAllBlogs()
             setAllPosts(data)
+            setActivityIndic(false)
         } catch (error) {
             console.log("Getting posts error")
         }
+        setActivityIndic(false)
     }
 
     useEffect(() => {
@@ -51,8 +46,18 @@ function HomeScreen(props) {
         props.navigation.navigate('SearchPostsScreen', { filterProducts: allPosts })
     }
 
+    const handleLogout = async () => {
+        try {
+            await AsyncStorage.removeItem('user');
+            Restart()
+        } catch (error) {
+
+        }
+    }
+
     return (
         <ScrollView style={{ flex: 1, width: "100%", backgroundColor: Colors.white }} >
+            <LoadingModal show={activityIndic} />
             <View style={{ width: "100%", height: RFPercentage(26), backgroundColor: Colors.white, justifyContent: 'center', alignItems: 'center' }} >
                 <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 0.7]} end={[1, 0.2]}  >
                     <StatusBar style="light" barStyle="light-content"
@@ -61,6 +66,10 @@ function HomeScreen(props) {
                 </LinearGradient>
 
                 <LinearGradient colors={[Colors.primaryLight, Colors.primary]} start={[0.1, 1.2]} end={[1.2, 0.9]} style={{ width: width, flex: 1, borderBottomLeftRadius: RFPercentage(5), borderBottomRightRadius: RFPercentage(5), flexDirection: 'column', alignItems: 'center', justifyContent: 'space-evenly' }} >
+                    <TouchableOpacity onPress={() => handleLogout()} style={{ position: "absolute", top: RFPercentage(4), left: RFPercentage(2.5) }} >
+                        <MaterialIcons name="logout" style={{ transform: [{ scaleX: -1 }] }} size={RFPercentage(3)} color={Colors.white} />
+                    </TouchableOpacity>
+
                     <Image source={logo} width={RFPercentage(10)} height={RFPercentage(10)} style={{ marginBottom: RFPercentage(-2), width: RFPercentage(16), height: RFPercentage(10) }} />
 
                     <View style={{ width: "90%", justifyContent: 'flex-start', alignItems: 'center', marginBottom: RFPercentage(-1), }} >
@@ -81,19 +90,12 @@ function HomeScreen(props) {
             </View>
 
             <View style={styles.container}>
-                {activityIndic
-                    ? <View style={{ flexDirection: 'column', backgroundColor: Colors.lightGrey, width: "100%", flex: 1.8, alignItems: 'center', justifyContent: 'center' }} >
-                        <ActivityIndicator color={Colors.primary} size={RFPercentage(6)} />
-                    </View>
-                    : <>
-                        {/* Bottom Contaienr */}
-                        <View style={{ marginBottom: RFPercentage(4), flexDirection: 'column', backgroundColor: Colors.white, width: "100%", flex: 1.8, alignItems: 'center', justifyContent: 'center' }} >
-                            {allPosts.map((item, index) => (
-                                <Card props={props} item={item} key={index} index={index} />
-                            ))}
-                        </View>
-                    </>
-                }
+                {/* Bottom Contaienr */}
+                <View style={{ marginBottom: RFPercentage(4), flexDirection: 'column', backgroundColor: Colors.white, width: "100%", flex: 1.8, alignItems: 'center', justifyContent: 'center' }} >
+                    {allPosts.map((item, index) => (
+                        <Card props={props} item={item} key={index} index={index} />
+                    ))}
+                </View>
             </View>
             <View>
             </View>

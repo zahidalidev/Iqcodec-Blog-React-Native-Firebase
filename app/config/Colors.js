@@ -15,3 +15,6 @@ const Colors = {
     danger: "#d62f2f"
 }
 export default Colors;
+
+// Header add Access-Control-Allow-Origin "*"
+// Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"

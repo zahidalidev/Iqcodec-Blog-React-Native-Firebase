@@ -47,8 +47,8 @@ function HomeScreen(props) {
         getPosts()
     }, [])
 
-    const handleSearch = (text) => {
-        setSearchValue(text)
+    const handleSearch = () => {
+        props.navigation.navigate('SearchPostsScreen', { filterProducts: allPosts })
     }
 
     return (
@@ -68,12 +68,13 @@ function HomeScreen(props) {
                             placeHolder="Search"
                             width="96%"
                             value={searchValue}
-                            onChange={(text) => handleSearch(text)}
+                            onChange={(text) => handleSearch()}
                             rightIcon="magnify"
                             rightFunction={() => handleSearch()}
                             elevation={6}
                             height={RFPercentage(5.7)}
                             backgroundColor={Colors.white}
+                            startEdit={() => handleSearch()}
                         />
                     </View>
                 </LinearGradient>

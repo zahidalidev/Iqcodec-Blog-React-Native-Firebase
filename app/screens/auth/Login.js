@@ -36,7 +36,9 @@ function Login(props) {
         setFeilds(tempFeilds);
     }
 
-    const handleSubmit = async () => { }
+    const handleSubmit = async () => {
+
+    }
 
     // get user from AsyncStorage to confirm login or logout
     let validateCurrentUser = async () => { }

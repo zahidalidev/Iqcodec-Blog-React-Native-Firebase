@@ -23,7 +23,7 @@ function SignUp({ onPressHandle }) {
             placeHolder: "Enter your Name",
             value: '',
             secure: false,
-            icon: "email-outline"
+            icon: "account"
         },
         {
             id: 1,
